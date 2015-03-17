@@ -1,0 +1,54 @@
+`<!--
+/*
+     <background.html for runing in background of SIXXS  Extension.>
+    Copyright (C) <2011> <SIXXS Extension Authors :zghaia@gmail.com>
+                          All rights reserved.
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details 
+                      <./GNU GENERAL PUBLIC LICENSE>
+*/
+-->
+
+<html>
+<script src="./scripts/tips.js"></script>
+<script src="./scripts/state.js"></script>	
+<script src="./scripts/sixxs.js"></script>	 
+<script type="text/javascript">
+	
+chrome.browserAction.onClicked.addListener(function(tab) {
+	switchState();
+	showTips(getState());
+	showState();
+});
+
+chrome.tabs.onCreated.addListener(function(tab) {
+	if(urlFilter(tab.url))
+	{
+		callSixxs(tab.id,tab.index,tab.url,flagSixxs((getState()==1),true ,false));
+	}
+});
+
+function onClick(info, tab){
+	callSixxs(tab.id,tab.index+1,urlMatch(tab.url,info.linkUrl),flagSixxs(true,false,false));	
+};
+chrome.contextMenus.create({
+        "title"    : "Sixxs",
+		"type"     : "normal",
+        "contexts" : ["link"],
+        "onclick"  : onClick
+});
+
+chrome.omnibox.onInputEntered.addListener(function(text) {
+	chrome.tabs.getSelected(null, function(tab) {
+		callSixxs(tab.id,tab.index+1,urlForm(text),flagSixxs(true,false,true));	
+	});
+});
+
+</script>
+</html>

@@ -1,0 +1,24 @@
+{
+  "name": "Sixxs Extension",
+  "version": "1.7",
+  "description": "The extension made by zghaia@gmail.com for auto using sixxs.org web proxy",
+  "icons": {
+      "128"	: "./images/logo.png",
+      "48"	: "./images/logo.png",
+	  "16"	: "./images/logo.png"
+  },
+  "permissions": [
+        "notifications",
+  		"tabs", 
+		"contextMenus",
+		"*://*/*"
+  ],
+  "background_page": "main.html",
+  "browser_action": {
+    "default_title": "Sixxs Extension",
+    "default_icon": "./images/logo.png"
+  },
+  "omnibox": { "keyword" : "6" },
+  "options_page": "option.html",
+  "update_url": "http://zghaia-sixxs-extension.googlecode.com/files/update.xml"
+}
